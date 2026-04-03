@@ -1,4 +1,11 @@
 export PATH="/opt/miyoomini-toolchain/usr/bin:${PATH}:/opt/miyoomini-toolchain/usr/arm-linux-gnueabihf/sysroot/bin"
 export CROSS_COMPILE=/opt/miyoomini-toolchain/usr/bin/arm-linux-gnueabihf-
+export CROSS_TRIPLE=arm-linux-gnueabihf
+export CC=${CROSS_COMPILE}gcc
+export CXX=${CROSS_COMPILE}g++
+export AR=${CROSS_COMPILE}ar
+export RANLIB=${CROSS_COMPILE}ranlib
+export STRIP=${CROSS_COMPILE}strip
+export SYSROOT=/opt/miyoomini-toolchain/usr/arm-linux-gnueabihf/sysroot
 export PREFIX=/opt/miyoomini-toolchain/usr/arm-linux-gnueabihf/sysroot/usr
 export UNION_PLATFORM=miyoomini
