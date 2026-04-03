@@ -1,5 +1,4 @@
 #FROM debian/eol:buster-slim
-#FROM docker.io/library/ubuntu24.04
 FROM ubuntu:24.04
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -56,7 +55,7 @@ ENV PKG_CONFIG_PATH=${SYSROOT}/usr/lib/pkgconfig:${SYSROOT}/usr/share/pkgconfig:
 
 # stuff and extra libs
 RUN ./build-libzip.sh
-#RUN ./build-bluez.sh
+RUN ./build-alsa.sh
 RUN ./build-libsamplerate.sh
 RUN ./build-lz4.sh
 
