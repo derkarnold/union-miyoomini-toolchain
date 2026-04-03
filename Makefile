@@ -15,3 +15,7 @@ shell: .build
 clean:
 	docker rmi $(TOOLCHAIN_NAME)
 	rm -f .build
+
+publish:
+	docker build -t ghcr.io/derkarnold/miyoomini-toolchain:latest .
+	docker push ghcr.io/derkarnold/miyoomini-toolchain:latest

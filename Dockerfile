@@ -7,22 +7,25 @@ ENV TZ=America/New_York
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN apt-get -y update && apt-get -y install \
-	bc \
-	build-essential \
-	bzip2 \
-	bzr \
-	cmake \
-	cmake-curses-gui \
-	cpio \
-	git \
-	libncurses5-dev \
-	make \
-	rsync \
-	scons \
-	tree \
-	unzip \
-	wget \
-	zip \
+    make \
+    #    build-essential \
+    cmake \
+    ninja-build \
+    autotools-dev \
+    autoconf \
+    automake \
+    autopoint \
+    libtool \
+    po4a \
+    m4 \
+    pkg-config \
+    unzip \
+    wget \
+    git \
+    python3 \
+    ca-certificates \
+    gettext \
+    vim \
   && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /root/workspace
@@ -34,7 +37,7 @@ RUN ./setup-toolchain.sh
 ENV TOOLCHAIN_DIR=/opt/miyoomini-toolchain
 ENV CROSS_TRIPLE=arm-linux-gnueabihf
 ENV CROSS_ROOT=${TOOLCHAIN_DIR}/usr
-ENV SYSROOT=${CROSS_ROOT}/${CROSS_TRIPLE}/sysroot
+ENV SYSROOT=${CROSS_ROOT}/${CROSS_TRIPLE}/libc
 
 ENV AS=${CROSS_ROOT}/bin/${CROSS_TRIPLE}-as \
     AR=${CROSS_ROOT}/bin/${CROSS_TRIPLE}-ar \
@@ -49,7 +52,7 @@ ENV PREFIX=${SYSROOT}/usr
 ENV CMAKE_TOOLCHAIN_FILE=/root/toolchain-arm.cmake
 ENV UNION_PLATFORM=miyoomini
 ENV PKG_CONFIG_SYSROOT_DIR=${SYSROOT}
-ENV PKG_CONFIG_PATH=${SYSROOT}/usr/lib/pkgconfig:${SYSROOT}/usr/share/pkgconfig
+ENV PKG_CONFIG_PATH=${SYSROOT}/usr/lib/pkgconfig:${SYSROOT}/usr/share/pkgconfig:${SYSROOT}/usr/lib/arm-linux-gnueabihf/pkgconfig
 
 # stuff and extra libs
 RUN ./build-libzip.sh

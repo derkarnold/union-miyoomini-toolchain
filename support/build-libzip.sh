@@ -28,9 +28,10 @@ git clone --depth=1 https://github.com/facebook/zstd.git /tmp/zstd && \
 # bz2
 wget -q https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz -O /tmp/bzip2.tar.gz && \
     cd /tmp && tar -xzf bzip2.tar.gz && cd bzip2-1.0.8 && \
-    make CC=$CC AR=$AR RANLIB=$RANLIB -j$(nproc) && \
+    sed -i 's/^CFLAGS=/CFLAGS=-fPIC /' Makefile &&
     make CC=$CC AR=$AR RANLIB=$RANLIB PREFIX=$SYSROOT/usr install && \
     cd /tmp && rm -rf /tmp/bzip2*
+#    make CC=$CC AR=$AR RANLIB=$RANLIB -j$(nproc) && \
 
 # libzip
 git clone https://github.com/nih-at/libzip.git /tmp/libzip && \
